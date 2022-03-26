@@ -42,7 +42,7 @@ function createWorkspaceTfcGettingStarted(scope: Construct, organization: string
     organization,
     executionMode: "remote",
     autoApply: true,
-    workingDirectory: "tfc_getting_started",
+    workingDirectory: "tfc-getting-started",
     lifecycle: {
       ignoreChanges: ['vcs_repo'] // following actual provider's stanza
     }

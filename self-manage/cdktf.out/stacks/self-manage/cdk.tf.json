@@ -59,7 +59,7 @@
         },
         "name": "tfc-getting-started",
         "organization": "${var.organization}",
-        "working_directory": "tfc_getting_started"
+        "working_directory": "tfc-getting-started"
       }
     }
   },
