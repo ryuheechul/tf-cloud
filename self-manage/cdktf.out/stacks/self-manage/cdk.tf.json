@@ -16,6 +16,32 @@
     ]
   },
   "resource": {
+    "tfe_organization_token": {
+      "org_token": {
+        "//": {
+          "metadata": {
+            "path": "self-manage/org_token",
+            "uniqueId": "org_token"
+          }
+        },
+        "organization": "${var.organization}"
+      }
+    },
+    "tfe_variable": {
+      "provider_token": {
+        "//": {
+          "metadata": {
+            "path": "self-manage/provider_token",
+            "uniqueId": "provider_token"
+          }
+        },
+        "category": "terraform",
+        "key": "provider_token",
+        "sensitive": true,
+        "value": "${tfe_organization_token.org_token.token}",
+        "workspace_id": "${tfe_workspace.tfc_getting_started.id}"
+      }
+    },
     "tfe_workspace": {
       "tfc_getting_started": {
         "//": {
