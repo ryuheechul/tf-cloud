@@ -58,19 +58,16 @@ function createWorkspaceTfcGettingStarted(scope: Construct, organization: string
     // vcsRepo: {}
   })
 
-  // since there is possibility to override manually, we should ignore changes of value
-  createVariable(scope, workspace.id, 'provider_token', token, true, {
-    ignoreChanges: 'all',
-  })
-}
-
-function createVariable(scope: Construct, workspace: string, key: string, value: string, sensitive = false, lifecycle = {}) {
-  new Variable(scope, key, {
-    category: 'terraform',
-    sensitive,
-    value,
+  const key = 'provider_token';
+  const tokenVar = new Variable(scope, key, {
     key,
-    workspaceId: workspace,
-    lifecycle
+    sensitive: true,
+    workspaceId: workspace.id,
+    category: 'terraform',
+    value: token,
+    // this will be taken care of by `addOverride` instead - https://github.com/hashicorp/terraform-cdk/issues/1425#issuecomment-995601755
+    // lifecycle: { ignoreChanges: 'all' },
   })
+
+  tokenVar.addOverride('lifecycle.ignore_changes', 'all');
 }

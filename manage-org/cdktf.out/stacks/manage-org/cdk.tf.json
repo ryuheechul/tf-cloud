@@ -2,6 +2,11 @@
   "//": {
     "metadata": {
       "backend": "remote",
+      "overrides": {
+        "tfe_variable": [
+          "lifecycle"
+        ]
+      },
       "stackName": "manage-org",
       "version": "0.9.4"
     },
