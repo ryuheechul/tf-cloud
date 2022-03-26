@@ -3,7 +3,7 @@ Why not manage Terraform Cloud using itself!
 
 ## Minimal Manual Bootstrap
 - create organization manually and create `manage-org` workspace
-- provide `TFE_TOKEN` value (by creating (org) api key from Terraform Cloud) at `manage-org` workspace (mark sensitive)
+- provide `TFE_TOKEN` value (by creating (not org) api token from Terraform Cloud) at `manage-org` workspace (mark sensitive)
 - provide `organization` variable for the created organization name
 - change execution mode to Remote (but leave Manual apply for safety)
 - Settings > Version Control > Version Control Workflow to connect this repo
