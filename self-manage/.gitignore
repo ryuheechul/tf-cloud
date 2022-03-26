@@ -1,0 +1,11 @@
+*.d.ts
+*.js
+node_modules
+# cdktf.out - exclude this to allow remote execution on terraform cloud
+cdktf.log
+*terraform.*.tfstate*
+.gen
+.terraform
+tsconfig.tsbuildinfo
+!jest.config.js
+!setup.js

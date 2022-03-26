@@ -1,0 +1,62 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "remote",
+      "stackName": "self-manage",
+      "version": "0.9.4"
+    },
+    "outputs": {
+    }
+  },
+  "provider": {
+    "tfe": [
+      {
+        "hostname": "app.terraform.io"
+      }
+    ]
+  },
+  "resource": {
+    "tfe_workspace": {
+      "tfc_getting_started": {
+        "//": {
+          "metadata": {
+            "path": "self-manage/tfc_getting_started",
+            "uniqueId": "tfc_getting_started"
+          }
+        },
+        "auto_apply": true,
+        "execution_mode": "remote",
+        "lifecycle": {
+          "ignore_changes": [
+            "vcs_repo"
+          ]
+        },
+        "name": "tfc-getting-started",
+        "organization": "${var.organization}",
+        "working_directory": "tfc_getting_started"
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "remote": {
+        "hostname": "app.terraform.io",
+        "organization": "${var.organization}",
+        "workspaces": {
+          "name": "self-manage"
+        }
+      }
+    },
+    "required_providers": {
+      "tfe": {
+        "source": "hashicorp/tfe",
+        "version": "~> 0.26.1"
+      }
+    }
+  },
+  "variable": {
+    "organization": {
+      "description": "to be able to set Terraform Cloud Organization name via variable"
+    }
+  }
+}
