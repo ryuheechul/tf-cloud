@@ -60,9 +60,7 @@ function createWorkspaceTfcGettingStarted(scope: Construct, organization: string
 
   // since there is possibility to override manually, we should ignore changes of value
   createVariable(scope, workspace.id, 'provider_token', token, true, {
-    ignoreChanges: [
-      'value'
-    ],
+    ignoreChanges: 'all',
   })
 }
 

@@ -52,9 +52,7 @@
         "category": "terraform",
         "key": "provider_token",
         "lifecycle": {
-          "ignore_changes": [
-            "value"
-          ]
+          "ignore_changes": "all"
         },
         "sensitive": true,
         "value": "${tfe_team_token.team_token.token}",
