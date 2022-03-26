@@ -1,0 +1,13 @@
+{
+  "version": "0.9.4",
+  "stacks": {
+    "manage-org": {
+      "name": "manage-org",
+      "constructPath": "manage-org",
+      "workingDirectory": "stacks/manage-org",
+      "synthesizedStackPath": "stacks/manage-org/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    }
+  }
+}

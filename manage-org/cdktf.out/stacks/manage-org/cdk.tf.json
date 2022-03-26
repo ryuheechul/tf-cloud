@@ -2,7 +2,7 @@
   "//": {
     "metadata": {
       "backend": "remote",
-      "stackName": "self-manage",
+      "stackName": "manage-org",
       "version": "0.9.4"
     },
     "outputs": {
@@ -13,7 +13,7 @@
       "team_owners": {
         "//": {
           "metadata": {
-            "path": "self-manage/team_owners",
+            "path": "manage-org/team_owners",
             "uniqueId": "team_owners"
           }
         },
@@ -34,7 +34,7 @@
       "team_token": {
         "//": {
           "metadata": {
-            "path": "self-manage/team_token",
+            "path": "manage-org/team_token",
             "uniqueId": "team_token"
           }
         },
@@ -45,7 +45,7 @@
       "provider_token": {
         "//": {
           "metadata": {
-            "path": "self-manage/provider_token",
+            "path": "manage-org/provider_token",
             "uniqueId": "provider_token"
           }
         },
@@ -63,7 +63,7 @@
       "tfc_getting_started": {
         "//": {
           "metadata": {
-            "path": "self-manage/tfc_getting_started",
+            "path": "manage-org/tfc_getting_started",
             "uniqueId": "tfc_getting_started"
           }
         },
@@ -86,7 +86,7 @@
         "hostname": "app.terraform.io",
         "organization": "${var.organization}",
         "workspaces": {
-          "name": "self-manage"
+          "name": "manage-org"
         }
       }
     },

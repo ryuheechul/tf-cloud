@@ -20,7 +20,7 @@ class MyStack extends TerraformStack {
       organization,
       hostname,
       workspaces: {
-        name: "self-manage",
+        name: "manage-org",
       },
     });
 
@@ -41,7 +41,7 @@ class MyStack extends TerraformStack {
 }
 
 const app = new App()
-new MyStack(app, "self-manage");
+new MyStack(app, "manage-org");
 app.synth();
 
 function createWorkspaceTfcGettingStarted(scope: Construct, organization: string, token: string) {
