@@ -2,9 +2,9 @@
 Why not manage Terraform Cloud using itself!
 
 ## Minimal Manual Bootstrap
-- provide `TFE_TOKEN` value (by creating api key from Terraform Cloud) at `self-manage` (mark sensitive)
-- create organization manually
-- provide `organization` variable set the organization
+- create organization manually and create `self-manage` workspace
+- provide `TFE_TOKEN` value (by creating (org) api key from Terraform Cloud) at `self-manage` workspace (mark sensitive)
+- provide `organization` variable for the created organization name
 - change execution mode to Remote (but leave Manual apply for safety)
 - Settings > Version Control > Version Control Workflow to connect this repo
 - set `self-manage/cdktf.out/stacks/self-manage` to Terraform Working Directory

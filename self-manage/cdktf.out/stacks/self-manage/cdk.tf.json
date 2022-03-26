@@ -16,15 +16,15 @@
     ]
   },
   "resource": {
-    "tfe_organization_token": {
-      "org_token": {
+    "tfe_team_token": {
+      "team_token": {
         "//": {
           "metadata": {
-            "path": "self-manage/org_token",
-            "uniqueId": "org_token"
+            "path": "self-manage/team_token",
+            "uniqueId": "team_token"
           }
         },
-        "organization": "${var.organization}"
+        "team_id": "owners"
       }
     },
     "tfe_variable": {
@@ -38,7 +38,7 @@
         "category": "terraform",
         "key": "provider_token",
         "sensitive": true,
-        "value": "${tfe_organization_token.org_token.token}",
+        "value": "${tfe_team_token.team_token.token}",
         "workspace_id": "${tfe_workspace.tfc_getting_started.id}"
       }
     },
