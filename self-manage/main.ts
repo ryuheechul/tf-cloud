@@ -29,6 +29,9 @@ class MyStack extends TerraformStack {
       organization
     })
 
+    // in theory according to https://github.com/hashicorp/terraform-provider-fakewebservices#installation--usage,
+    // team's token should be sufficent for fakewebservices but it may not work
+    // in that case you might want to override manually
     const token = new TeamToken(this, 'team_token', {
       teamId: team.id
     })
@@ -55,15 +58,21 @@ function createWorkspaceTfcGettingStarted(scope: Construct, organization: string
     // vcsRepo: {}
   })
 
-  createVariable(scope, workspace.id, 'provider_token', token, true);
+  // since there is possibility to override manually, we should ignore changes of value
+  createVariable(scope, workspace.id, 'provider_token', token, true, {
+    ignoreChanges: [
+      'value'
+    ],
+  })
 }
 
-function createVariable(scope: Construct, workspace: string, key: string, value: string, sensitive = false) {
+function createVariable(scope: Construct, workspace: string, key: string, value: string, sensitive = false, lifecycle = {}) {
   new Variable(scope, key, {
     category: 'terraform',
     sensitive,
     value,
     key,
-    workspaceId: workspace
+    workspaceId: workspace,
+    lifecycle
   })
 }

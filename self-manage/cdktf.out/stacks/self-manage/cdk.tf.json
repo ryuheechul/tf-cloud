@@ -51,6 +51,11 @@
         },
         "category": "terraform",
         "key": "provider_token",
+        "lifecycle": {
+          "ignore_changes": [
+            "value"
+          ]
+        },
         "sensitive": true,
         "value": "${tfe_team_token.team_token.token}",
         "workspace_id": "${tfe_workspace.tfc_getting_started.id}"
