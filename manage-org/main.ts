@@ -59,7 +59,7 @@ function createWorkspaceTfcGettingStarted(scope: Construct, organization: string
   })
 
   const key = 'provider_token';
-  const tokenVar = new Variable(scope, key, {
+  (new Variable(scope, key, {
     key,
     sensitive: true,
     workspaceId: workspace.id,
@@ -67,7 +67,5 @@ function createWorkspaceTfcGettingStarted(scope: Construct, organization: string
     value: token,
     // this will be taken care of by `addOverride` instead - https://github.com/hashicorp/terraform-cdk/issues/1425#issuecomment-995601755
     // lifecycle: { ignoreChanges: 'all' },
-  })
-
-  tokenVar.addOverride('lifecycle.ignore_changes', 'all');
+  })).addOverride('lifecycle.ignore_changes', 'all');
 }
