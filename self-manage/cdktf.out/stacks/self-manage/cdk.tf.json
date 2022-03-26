@@ -8,6 +8,20 @@
     "outputs": {
     }
   },
+  "data": {
+    "tfe_team": {
+      "team_owners": {
+        "//": {
+          "metadata": {
+            "path": "self-manage/team_owners",
+            "uniqueId": "team_owners"
+          }
+        },
+        "name": "owners",
+        "organization": "${var.organization}"
+      }
+    }
+  },
   "provider": {
     "tfe": [
       {
@@ -24,7 +38,7 @@
             "uniqueId": "team_token"
           }
         },
-        "team_id": "owners"
+        "team_id": "${data.tfe_team.team_owners.id}"
       }
     },
     "tfe_variable": {

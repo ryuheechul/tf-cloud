@@ -1,6 +1,6 @@
 import { Construct } from "constructs";
 import { App, TerraformStack, TerraformVariable, RemoteBackend } from "cdktf";
-import { TfeProvider, Workspace, Variable, TeamToken } from "@cdktf/provider-tfe"
+import { TfeProvider, Workspace, Variable, TeamToken, DataTfeTeam } from "@cdktf/provider-tfe"
 
 const hostname = "app.terraform.io";
 
@@ -24,9 +24,13 @@ class MyStack extends TerraformStack {
       },
     });
 
+    const team = new DataTfeTeam(this, 'team_owners', {
+      name: 'owners',
+      organization
+    })
 
     const token = new TeamToken(this, 'team_token', {
-      teamId: 'owners',
+      teamId: team.id
     })
 
     createWorkspaceTfcGettingStarted(this, organization, token.token)
