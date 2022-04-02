@@ -2,7 +2,7 @@ import { Construct } from "constructs";
 import { App, TerraformStack, TerraformVariable, RemoteBackend } from "cdktf";
 import { TfeProvider, Workspace, Variable, TeamToken, DataTfeTeam } from "@cdktf/provider-tfe"
 
-const hostname = "app.terraform.io";
+const hostname = 'app.terraform.io';
 
 class MyStack extends TerraformStack {
   constructor(scope: Construct, name: string) {
@@ -12,10 +12,10 @@ class MyStack extends TerraformStack {
       description: "to be able to set Terraform Cloud Organization name via variable"
     })).value;
 
-    new TfeProvider(this, "Tfe", {
-      hostname,
-    })
+    new TfeProvider(this, "Tfe", {})
 
+    // turns out this will not work on local execution as remote backend doesn't support reading variables
+    // but it doesn't matter for now since this part is being igrnored on remote execution at TFC
     new RemoteBackend(this, {
       organization,
       hostname,
@@ -37,6 +37,7 @@ class MyStack extends TerraformStack {
     })
 
     createWorkspaceTfcGettingStarted(this, organization, token.token)
+    createWorkspaceAutoTFVars(this, organization);
   }
 }
 
@@ -59,7 +60,7 @@ function createWorkspaceTfcGettingStarted(scope: Construct, organization: string
   })
 
   const key = 'provider_token';
-  (new Variable(scope, key, {
+  (new Variable(workspace, key, {
     key,
     sensitive: true,
     workspaceId: workspace.id,
@@ -68,4 +69,34 @@ function createWorkspaceTfcGettingStarted(scope: Construct, organization: string
     // this will be taken care of by `addOverride` instead - https://github.com/hashicorp/terraform-cdk/issues/1425#issuecomment-995601755
     // lifecycle: { ignoreChanges: 'all' },
   })).addOverride('lifecycle.ignore_changes', 'all');
+}
+
+function createWorkspaceAutoTFVars(scope: Construct, organization: string) {
+  const name = "auto-tfvars";
+  ['dev', 'prod'].forEach((deploy) => {
+    const wsName = name + '-' + deploy
+    const workspace = new Workspace(scope, wsName, {
+      name: wsName,
+      organization,
+      executionMode: "remote",
+      autoApply: true,
+      workingDirectory: "auto-tfvars",
+      lifecycle: {
+        ignoreChanges: ['vcs_repo'] // following actual provider's stanza
+      }
+      // // manage repo manually (given with nice UI from Terraform Cloud web page) might be practically a lot better until the scale is too big
+      // vcsRepo: {}
+    })
+
+    const key = 'deploy_name';
+    (new Variable(workspace, key, {
+      key,
+      sensitive: false,
+      workspaceId: workspace.id,
+      category: 'terraform',
+      value: deploy,
+      // this will be taken care of by `addOverride` instead - https://github.com/hashicorp/terraform-cdk/issues/1425#issuecomment-995601755
+      // lifecycle: { ignoreChanges: 'all' },
+    })).addOverride('lifecycle.ignore_changes', 'all');
+  })
 }

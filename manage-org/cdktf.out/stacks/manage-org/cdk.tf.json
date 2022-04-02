@@ -4,6 +4,8 @@
       "backend": "remote",
       "overrides": {
         "tfe_variable": [
+          "lifecycle",
+          "lifecycle",
           "lifecycle"
         ]
       },
@@ -30,7 +32,6 @@
   "provider": {
     "tfe": [
       {
-        "hostname": "app.terraform.io"
       }
     ]
   },
@@ -47,11 +48,43 @@
       }
     },
     "tfe_variable": {
-      "provider_token": {
+      "auto-tfvars-dev_deploy_name_C0516816": {
         "//": {
           "metadata": {
-            "path": "manage-org/provider_token",
-            "uniqueId": "provider_token"
+            "path": "manage-org/auto-tfvars-dev/deploy_name",
+            "uniqueId": "auto-tfvars-dev_deploy_name_C0516816"
+          }
+        },
+        "category": "terraform",
+        "key": "deploy_name",
+        "lifecycle": {
+          "ignore_changes": "all"
+        },
+        "sensitive": false,
+        "value": "dev",
+        "workspace_id": "${tfe_workspace.auto-tfvars-dev.id}"
+      },
+      "auto-tfvars-prod_deploy_name_88108046": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/auto-tfvars-prod/deploy_name",
+            "uniqueId": "auto-tfvars-prod_deploy_name_88108046"
+          }
+        },
+        "category": "terraform",
+        "key": "deploy_name",
+        "lifecycle": {
+          "ignore_changes": "all"
+        },
+        "sensitive": false,
+        "value": "prod",
+        "workspace_id": "${tfe_workspace.auto-tfvars-prod.id}"
+      },
+      "tfc_getting_started_provider_token_49C2BCC6": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/tfc_getting_started/provider_token",
+            "uniqueId": "tfc_getting_started_provider_token_49C2BCC6"
           }
         },
         "category": "terraform",
@@ -65,6 +98,42 @@
       }
     },
     "tfe_workspace": {
+      "auto-tfvars-dev": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/auto-tfvars-dev",
+            "uniqueId": "auto-tfvars-dev"
+          }
+        },
+        "auto_apply": true,
+        "execution_mode": "remote",
+        "lifecycle": {
+          "ignore_changes": [
+            "vcs_repo"
+          ]
+        },
+        "name": "auto-tfvars-dev",
+        "organization": "${var.organization}",
+        "working_directory": "auto-tfvars"
+      },
+      "auto-tfvars-prod": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/auto-tfvars-prod",
+            "uniqueId": "auto-tfvars-prod"
+          }
+        },
+        "auto_apply": true,
+        "execution_mode": "remote",
+        "lifecycle": {
+          "ignore_changes": [
+            "vcs_repo"
+          ]
+        },
+        "name": "auto-tfvars-prod",
+        "organization": "${var.organization}",
+        "working_directory": "auto-tfvars"
+      },
       "tfc_getting_started": {
         "//": {
           "metadata": {
