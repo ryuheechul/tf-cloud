@@ -1,0 +1,10 @@
+{
+  "deploy": "dev",
+  "object_example" : {
+    "entry1" : "dev-entry1",
+    "entry2" : "dev-entry2"
+  },
+  "list_example" : [
+    "1"
+  ]
+}

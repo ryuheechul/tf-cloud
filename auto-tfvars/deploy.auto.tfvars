@@ -24,3 +24,21 @@ per_deploy = [
     ]
   }
 ]
+
+# if you wish to have each deploy values on its own file, ex) `dev.auto.tfvars`, `prod.autotfvars`, that seems to be impossible with `tfvars`
+# however we can always render a `deploy.auto.tfvars.json` from `dev.deploy.json` and `prod.deploy.json`
+
+# dev.deploy.json
+# {
+#   "deploy": "dev",
+#   ...
+# }
+#
+# prod.deploy.json
+# {
+#   "deploy": "prod",
+#   ...
+# }
+#
+# run `jq -s '[.[0], .[1]]' dev.deploy.json prod.deploy.json`
+# look an example at `./compile`
