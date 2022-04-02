@@ -1,3 +1,5 @@
+# different deploy (aka env) values can be together in one separate file
+
 per_deploy = [
   {
     deploy = "dev"
