@@ -4,6 +4,7 @@ variable "deploy_name" {
 }
 
 variable "per_deploy" {
+  # because it's list any number of deploys can be added and they all need to follow this type
   type = list(object({
     deploy = string
     object_example = object({
@@ -14,6 +15,7 @@ variable "per_deploy" {
   }))
 
   default = [
+    # deploy 1
     {
       deploy = "example"
       object_example = {
@@ -24,24 +26,21 @@ variable "per_deploy" {
         "1",
         "2"
       ]
-    }
+    },
+    # deploy 2
+    # {
+    #   ...
+    # }
   ]
 }
 
 locals {
-
   # turns
   # ```hcl
   # [
   #   {
   #     deploy = "example"
-  #     object_example = {
-  #       entry1 = "example-entry1"
-  #     }
-  #     list_example = [
-  #       "1",
-  #       "2"
-  #     ]
+  #     ...
   #   }
   # ]
   # ```
@@ -50,23 +49,27 @@ locals {
   # {
   #   "example": {
   #     deploy = "example"
-  #     object_example = {
-  #       entry1 = "example-entry1"
-  #     }
-  #     list_example = [
-  #       "1",
-  #       "2"
-  #     ]
+  #     ...
   #   }
   # }
   # ```
   deploys = {
     for obj in var.per_deploy : obj.deploy => obj
   }
+
+  # finally the values that corresponds to deploy
   deploy = local.deploys[var.deploy_name]
 }
 
 # should be at outputs.tf
-output "result" {
+output "debug_var_deploy_name" {
+  value = var.deploy_name
+}
+
+output "debug_var_per_deploy" {
+  value = var.per_deploy
+}
+
+output "debug_local_deploy" {
   value = local.deploy
 }
