@@ -7,6 +7,7 @@ pkgs.mkShell {
   buildInputs = [
     terraform
     nodePackages.cdktf-cli
+    nodePackages.npm
     tf-helper
   ];
 }

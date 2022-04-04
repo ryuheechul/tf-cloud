@@ -6,6 +6,14 @@
         "tfe_variable": [
           "lifecycle",
           "lifecycle",
+          "lifecycle",
+          "lifecycle",
+          "lifecycle",
+          "lifecycle",
+          "lifecycle",
+          "lifecycle",
+          "lifecycle",
+          "lifecycle",
           "lifecycle"
         ]
       },
@@ -48,11 +56,11 @@
       }
     },
     "tfe_variable": {
-      "auto-tfvars-dev_deploy_name_C0516816": {
+      "auto-tfvars-dev_tfvar-deploy_name_D9D197A1": {
         "//": {
           "metadata": {
-            "path": "manage-org/auto-tfvars-dev/deploy_name",
-            "uniqueId": "auto-tfvars-dev_deploy_name_C0516816"
+            "path": "manage-org/auto-tfvars-dev/tfvar-deploy_name",
+            "uniqueId": "auto-tfvars-dev_tfvar-deploy_name_D9D197A1"
           }
         },
         "category": "terraform",
@@ -64,11 +72,43 @@
         "value": "dev",
         "workspace_id": "${tfe_workspace.auto-tfvars-dev.id}"
       },
-      "auto-tfvars-prod_deploy_name_88108046": {
+      "auto-tfvars-dev_tfvar-tfc_organization_43C3FF25": {
         "//": {
           "metadata": {
-            "path": "manage-org/auto-tfvars-prod/deploy_name",
-            "uniqueId": "auto-tfvars-prod_deploy_name_88108046"
+            "path": "manage-org/auto-tfvars-dev/tfvar-tfc_organization",
+            "uniqueId": "auto-tfvars-dev_tfvar-tfc_organization_43C3FF25"
+          }
+        },
+        "category": "terraform",
+        "key": "tfc_organization",
+        "lifecycle": {
+          "ignore_changes": "all"
+        },
+        "sensitive": false,
+        "value": "${var.organization}",
+        "workspace_id": "${tfe_workspace.auto-tfvars-dev.id}"
+      },
+      "auto-tfvars-dev_tfvar-tfc_workspace_8619EF7F": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/auto-tfvars-dev/tfvar-tfc_workspace",
+            "uniqueId": "auto-tfvars-dev_tfvar-tfc_workspace_8619EF7F"
+          }
+        },
+        "category": "terraform",
+        "key": "tfc_workspace",
+        "lifecycle": {
+          "ignore_changes": "all"
+        },
+        "sensitive": false,
+        "value": "auto-tfvars-dev",
+        "workspace_id": "${tfe_workspace.auto-tfvars-dev.id}"
+      },
+      "auto-tfvars-prod_tfvar-deploy_name_ECCCC9D8": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/auto-tfvars-prod/tfvar-deploy_name",
+            "uniqueId": "auto-tfvars-prod_tfvar-deploy_name_ECCCC9D8"
           }
         },
         "category": "terraform",
@@ -80,11 +120,75 @@
         "value": "prod",
         "workspace_id": "${tfe_workspace.auto-tfvars-prod.id}"
       },
-      "tfc_getting_started_provider_token_49C2BCC6": {
+      "auto-tfvars-prod_tfvar-tfc_organization_8A66EB17": {
         "//": {
           "metadata": {
-            "path": "manage-org/tfc_getting_started/provider_token",
-            "uniqueId": "tfc_getting_started_provider_token_49C2BCC6"
+            "path": "manage-org/auto-tfvars-prod/tfvar-tfc_organization",
+            "uniqueId": "auto-tfvars-prod_tfvar-tfc_organization_8A66EB17"
+          }
+        },
+        "category": "terraform",
+        "key": "tfc_organization",
+        "lifecycle": {
+          "ignore_changes": "all"
+        },
+        "sensitive": false,
+        "value": "${var.organization}",
+        "workspace_id": "${tfe_workspace.auto-tfvars-prod.id}"
+      },
+      "auto-tfvars-prod_tfvar-tfc_workspace_709DD19A": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/auto-tfvars-prod/tfvar-tfc_workspace",
+            "uniqueId": "auto-tfvars-prod_tfvar-tfc_workspace_709DD19A"
+          }
+        },
+        "category": "terraform",
+        "key": "tfc_workspace",
+        "lifecycle": {
+          "ignore_changes": "all"
+        },
+        "sensitive": false,
+        "value": "auto-tfvars-prod",
+        "workspace_id": "${tfe_workspace.auto-tfvars-prod.id}"
+      },
+      "manage-org-tf_tfvar-tfc_organization_6FDF55AA": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/manage-org-tf/tfvar-tfc_organization",
+            "uniqueId": "manage-org-tf_tfvar-tfc_organization_6FDF55AA"
+          }
+        },
+        "category": "terraform",
+        "key": "tfc_organization",
+        "lifecycle": {
+          "ignore_changes": "all"
+        },
+        "sensitive": false,
+        "value": "${var.organization}",
+        "workspace_id": "${tfe_workspace.manage-org-tf.id}"
+      },
+      "manage-org-tf_tfvar-tfc_workspace_9593CF6A": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/manage-org-tf/tfvar-tfc_workspace",
+            "uniqueId": "manage-org-tf_tfvar-tfc_workspace_9593CF6A"
+          }
+        },
+        "category": "terraform",
+        "key": "tfc_workspace",
+        "lifecycle": {
+          "ignore_changes": "all"
+        },
+        "sensitive": false,
+        "value": "manage-org-tf",
+        "workspace_id": "${tfe_workspace.manage-org-tf.id}"
+      },
+      "tfc-getting-started_tfvar-provider_token_9D70CAB1": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/tfc-getting-started/tfvar-provider_token",
+            "uniqueId": "tfc-getting-started_tfvar-provider_token_9D70CAB1"
           }
         },
         "category": "terraform",
@@ -94,7 +198,39 @@
         },
         "sensitive": true,
         "value": "${tfe_team_token.team_token.token}",
-        "workspace_id": "${tfe_workspace.tfc_getting_started.id}"
+        "workspace_id": "${tfe_workspace.tfc-getting-started.id}"
+      },
+      "tfc-getting-started_tfvar-tfc_organization_C61FF62D": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/tfc-getting-started/tfvar-tfc_organization",
+            "uniqueId": "tfc-getting-started_tfvar-tfc_organization_C61FF62D"
+          }
+        },
+        "category": "terraform",
+        "key": "tfc_organization",
+        "lifecycle": {
+          "ignore_changes": "all"
+        },
+        "sensitive": false,
+        "value": "${var.organization}",
+        "workspace_id": "${tfe_workspace.tfc-getting-started.id}"
+      },
+      "tfc-getting-started_tfvar-tfc_workspace_3D2D46C0": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/tfc-getting-started/tfvar-tfc_workspace",
+            "uniqueId": "tfc-getting-started_tfvar-tfc_workspace_3D2D46C0"
+          }
+        },
+        "category": "terraform",
+        "key": "tfc_workspace",
+        "lifecycle": {
+          "ignore_changes": "all"
+        },
+        "sensitive": false,
+        "value": "tfc-getting-started",
+        "workspace_id": "${tfe_workspace.tfc-getting-started.id}"
       }
     },
     "tfe_workspace": {
@@ -134,11 +270,29 @@
         "organization": "${var.organization}",
         "working_directory": "auto-tfvars"
       },
-      "tfc_getting_started": {
+      "manage-org-tf": {
         "//": {
           "metadata": {
-            "path": "manage-org/tfc_getting_started",
-            "uniqueId": "tfc_getting_started"
+            "path": "manage-org/manage-org-tf",
+            "uniqueId": "manage-org-tf"
+          }
+        },
+        "auto_apply": true,
+        "execution_mode": "remote",
+        "lifecycle": {
+          "ignore_changes": [
+            "vcs_repo"
+          ]
+        },
+        "name": "manage-org-tf",
+        "organization": "${var.organization}",
+        "working_directory": "manage-org-tf"
+      },
+      "tfc-getting-started": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/tfc-getting-started",
+            "uniqueId": "tfc-getting-started"
           }
         },
         "auto_apply": true,
