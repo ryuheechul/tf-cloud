@@ -3,6 +3,8 @@ variable "deploy_name" {
   type = string
 }
 
+# `list(object(...` is actually not a good idea do `map(object(...` instead
+# an example is at ../manage-org-tf/variables.tf
 variable "per_deploy" {
   # because it's list any number of deploys can be added and they all need to follow this type
   type = list(object({
