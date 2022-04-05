@@ -1,11 +1,11 @@
 resource "tfe_workspace" "workspace" {
   name                          = var.workspace_name
   organization                  = var.organization
-  auto_apply                    = true
+  auto_apply                    = var.deploy.auto_apply
   execution_mode                = "remote"
   working_directory             = var.deploy.working_directory
   structured_run_output_enabled = var.deploy.structured_run_output_enabled
-
+  tag_names                     = var.deploy.tags
   lifecycle {
     ignore_changes = [
       vcs_repo

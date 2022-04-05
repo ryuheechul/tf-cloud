@@ -15,13 +15,14 @@ variable "workspace_bundles" {
   description = "this is the meat"
   type = map(object({
     deploys = map(object({
-      working_directory = string
+      working_directory             = string
+      structured_run_output_enabled = optional(bool)
+      auto_apply                    = optional(bool)
+      tags                          = optional(list(string))
       vars = map(object({
         value     = string
         sensitive = bool
       }))
-
-      structured_run_output_enabled = optional(bool)
       # TBC
       # vcs = object
     }))

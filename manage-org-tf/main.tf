@@ -1,11 +1,17 @@
-data "tfe_organization" "org" {
-  name = var.tfc_organization
-}
+# # this just makes local testing inconvenient
+# # all the reference it give is only the same value, `data.tfe_organization.org.name` anyway
+# # so just use `var.tfc_organization`
+# data "tfe_organization" "org" {
+#   name = var.tfc_organization
+# }
 
 locals {
   workspace_bundles = defaults(var.workspace_bundles, {
     deploys = {
       structured_run_output_enabled = true
+      auto_apply                    = true
+      # we can't do this yet - https://github.com/hashicorp/terraform/issues/28406
+      # tags                          = []
     }
   })
 }
@@ -29,17 +35,19 @@ module "ws_bundles" {
 
   bundle       = each.value
   prefix       = each.key
-  organization = data.tfe_organization.org.name
+  organization = var.tfc_organization
 }
 
 # default convinient variables that will help each workspace to access metadata
 resource "tfe_variable_set" "for_all" {
   name         = "Common Varset"
   description  = ""
-  organization = data.tfe_organization.org.name
-  workspace_ids = flatten([
-    for bundle in module.ws_bundles : bundle.workspace_ids
-  ])
+  organization = var.tfc_organization
+  workspace_ids = [
+    for workspace in flatten([
+      for bundle in module.ws_bundles : bundle.workspaces
+    ]) : workspace.id
+  ]
 }
 
 resource "tfe_variable" "varset_test" {

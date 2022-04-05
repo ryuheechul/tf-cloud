@@ -15,6 +15,8 @@ variable "bundle" {
       working_directory = string
       # this doesn't have to be optional here since it's taken care at the root level
       structured_run_output_enabled = bool
+      tags                          = list(string)
+      auto_apply                    = bool
       vars = map(object({
         value     = string
         sensitive = bool

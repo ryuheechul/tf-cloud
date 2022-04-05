@@ -1,7 +1,5 @@
 output "bundles" {
-  value = {
-    for bundle in module.ws_bundles : bundle.name => { workspaces = bundle.workspace_names }
-  }
+  value = module.ws_bundles
 }
 
 output "debug_var_workspace_bundles" {
