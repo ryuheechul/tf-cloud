@@ -66,6 +66,8 @@ class MyStack extends TerraformStack {
           key: 'TFE_TOKEN',
           value: token.token,
         },
+        // adding and removing this might be better off doing it manually if the switching will be frequent
+        // also this might require to turn this to `false`, https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace#structured_run_output_enabled
         {
           ...envVar,
           key: 'TF_LOG',
