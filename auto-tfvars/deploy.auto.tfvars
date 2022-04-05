@@ -12,6 +12,17 @@ per_deploy = [
     ]
   },
   {
+    deploy = "staging"
+    object_example = {
+      entry1 = "staging-entry1"
+      entry2 = "staging-entry2"
+    }
+    list_example = [
+      "1",
+      "2",
+    ]
+  },
+  {
     deploy = "prod"
     object_example = {
       entry1 = "prod-entry1"
@@ -22,6 +33,14 @@ per_deploy = [
       "2",
       "3",
     ]
+  },
+  {
+    deploy         = "another-env"
+    object_example = {
+      entry1 = "entry1"
+      entry2 = "entry2"
+    }
+    list_example   = []
   }
 ]
 

@@ -83,6 +83,8 @@ class MyStack extends TerraformStack {
         }]
       });
     });
+
+    //TODO: add outputs that is similar to ../manage-org-tf/outputs.tf
   }
 }
 
