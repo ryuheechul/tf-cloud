@@ -15,6 +15,7 @@
           "lifecycle",
           "lifecycle",
           "lifecycle",
+          "lifecycle",
           "lifecycle"
         ]
       },
@@ -161,6 +162,21 @@
         },
         "sensitive": true,
         "value": "${tfe_team_token.team_token.token}",
+        "workspace_id": "${tfe_workspace.manage-org-tf.id}"
+      },
+      "manage-org-tf_TF_LOG_E7BCCAD5": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/manage-org-tf/TF_LOG",
+            "uniqueId": "manage-org-tf_TF_LOG_E7BCCAD5"
+          }
+        },
+        "category": "env",
+        "key": "TF_LOG",
+        "lifecycle": {
+          "ignore_changes": "all"
+        },
+        "value": "trace",
         "workspace_id": "${tfe_workspace.manage-org-tf.id}"
       },
       "manage-org-tf_tfc_organization_16B0E4F7": {

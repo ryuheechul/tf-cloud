@@ -65,6 +65,11 @@ class MyStack extends TerraformStack {
           sensitive: true,
           key: 'TFE_TOKEN',
           value: token.token,
+        },
+        {
+          ...envVar,
+          key: 'TF_LOG',
+          value: 'trace'
         }
       ]
     });
