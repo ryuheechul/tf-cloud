@@ -20,8 +20,8 @@
     "node": ">=14.0"
   },
   "dependencies": {
-    "@cdktf/provider-tfe": "^0.1.53",
-    "cdktf": "^0.9.4",
+    "@cdktf/provider-tfe": "^0.2.6",
+    "cdktf": "^0.10.1",
     "constructs": "^10.0.96"
   },
   "devDependencies": {

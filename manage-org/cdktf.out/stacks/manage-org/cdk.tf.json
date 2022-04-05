@@ -19,7 +19,7 @@
         ]
       },
       "stackName": "manage-org",
-      "version": "0.9.4"
+      "version": "0.10.1"
     },
     "outputs": {
     }
@@ -329,7 +329,7 @@
     "required_providers": {
       "tfe": {
         "source": "hashicorp/tfe",
-        "version": "~> 0.26.1"
+        "version": "0.26.1"
       }
     }
   },
