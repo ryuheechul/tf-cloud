@@ -74,6 +74,8 @@ module "varset_for_all" {
   ]
 }
 
+# Why do this? Imagine setting `aws-dev`, `aws-prod` tags and sets the whatever vars necessary to differentiate the deploy (env).
+# It could be credentials or anything else
 module "varset_only_for_exclusive_tag" {
   source = "./modules/variable-set"
 
