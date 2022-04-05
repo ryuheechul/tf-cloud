@@ -1,9 +1,10 @@
 resource "tfe_workspace" "workspace" {
-  name              = var.workspace_name
-  organization      = var.organization
-  auto_apply        = true
-  execution_mode    = "remote"
-  working_directory = var.deploy.working_directory
+  name                          = var.workspace_name
+  organization                  = var.organization
+  auto_apply                    = true
+  execution_mode                = "remote"
+  working_directory             = var.deploy.working_directory
+  structured_run_output_enabled = var.deploy.structured_run_output_enabled
 
   lifecycle {
     ignore_changes = [

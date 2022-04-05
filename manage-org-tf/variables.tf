@@ -10,6 +10,7 @@ variable "tfc_workspace" {
   type        = string
 }
 
+# the default value for optional ones is defined at ./main.tf
 variable "workspace_bundles" {
   description = "this is the meat"
   type = map(object({
@@ -20,6 +21,7 @@ variable "workspace_bundles" {
         sensitive = bool
       }))
 
+      structured_run_output_enabled = optional(bool)
       # TBC
       # vcs = object
     }))

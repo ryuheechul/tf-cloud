@@ -2,11 +2,20 @@ data "tfe_organization" "org" {
   name = var.tfc_organization
 }
 
+locals {
+  workspace_bundles = defaults(var.workspace_bundles, {
+    deploys = {
+      structured_run_output_enabled = true
+    }
+  })
+}
+
 # this + ./bundles.auto.tfvars can be comparable to ../manage-org/main.ts
 module "ws_bundles" {
   source = "./modules/workspace-bundle"
 
-  for_each = var.workspace_bundles
+  # need to use `local` instead of `var` to take effect on defaults - https://www.terraform.io/language/functions/defaults
+  for_each = local.workspace_bundles
   #      each.key = each.value
   # --------------------------
   # "bundle-name" = {

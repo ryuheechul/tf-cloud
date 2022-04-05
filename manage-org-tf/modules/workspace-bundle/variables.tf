@@ -13,6 +13,8 @@ variable "bundle" {
   type = object({
     deploys = map(object({
       working_directory = string
+      # this doesn't have to be optional here since it's taken care at the root level
+      structured_run_output_enabled = bool
       vars = map(object({
         value     = string
         sensitive = bool
