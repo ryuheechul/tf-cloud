@@ -8,4 +8,4 @@ test:
 
 .PHONY: synth
 synth:
-	cdktf synth
+	npm run synth
