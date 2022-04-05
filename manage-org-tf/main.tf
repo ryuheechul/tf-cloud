@@ -6,14 +6,26 @@
 # }
 
 locals {
+  # don't get confused - this from a var so it doesn't depends on actual applying
   workspace_bundles = defaults(var.workspace_bundles, {
     deploys = {
       structured_run_output_enabled = true
       auto_apply                    = true
       # we can't do this yet - https://github.com/hashicorp/terraform/issues/28406
+      # but empty list seems to be the default anyway
       # tags                          = []
     }
   })
+
+  # but this one depends on module.ws_bundles so it's only known after apply
+  all_workspaces = flatten([
+    for bundle in module.ws_bundles : bundle.workspaces
+  ])
+
+  workspaces_with_tag_exclusive = [
+    for workspace in local.all_workspaces : workspace
+    if contains(workspace.tag_names, "varset-exclusive")
+  ]
 }
 
 # this + ./bundles.auto.tfvars can be comparable to ../manage-org/main.ts
@@ -38,30 +50,48 @@ module "ws_bundles" {
   organization = var.tfc_organization
 }
 
-# default convinient variables that will help each workspace to access metadata
-resource "tfe_variable_set" "for_all" {
-  name         = "Common Varset"
+# imagine default convinient variables that will help each workspace to have some metadata
+module "varset_for_all" {
+  source = "./modules/variable-set"
+
+  name         = "A common Varset"
   description  = ""
   organization = var.tfc_organization
   workspace_ids = [
-    for workspace in flatten([
-      for bundle in module.ws_bundles : bundle.workspaces
-    ]) : workspace.id
+    for workspace in local.all_workspaces : workspace.id
+  ]
+
+  vars = [
+    {
+      key   = "test"
+      value = "test var set var 1"
+    },
+    {
+      category = "env"
+      key      = "TEST2"
+      value    = "test var set var 2"
+    }
   ]
 }
 
-resource "tfe_variable" "varset_test" {
-  category        = "terraform"
-  key             = "test"
-  value           = "test var set var 1"
-  sensitive       = false
-  variable_set_id = tfe_variable_set.for_all.id
-}
+module "varset_only_for_exclusive_tag" {
+  source = "./modules/variable-set"
 
-resource "tfe_variable" "varset_test2" {
-  category        = "env"
-  key             = "TEST2"
-  value           = "test var set var 2"
-  sensitive       = false
-  variable_set_id = tfe_variable_set.for_all.id
+  name         = "An exclusive varset"
+  description  = "Exclusive Varset for workspaces that has `varset-exclusive`"
+  organization = var.tfc_organization
+  workspace_ids = [
+    for workspace in local.workspaces_with_tag_exclusive : workspace.id
+  ]
+
+  vars = [
+    {
+      key   = "why"
+      value = "because of the workspace has `varset-exclusive` tag"
+    },
+    {
+      key   = "how"
+      value = "this is not something that comes for free by TFC, it's what's written by the root module"
+    }
+  ]
 }

@@ -15,8 +15,11 @@ crash.*.log
 # to change depending on the environment.
 *.tfvars
 *.tfvars.json
+# include *.auto.tfvars[.json]  so it can be checked on the repo
 !*.auto.tfvars
 !*.auto.tfvars.json
+# make one exception to use to make debug easier locally
+debug.auto.tfvars
 
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in
