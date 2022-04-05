@@ -1,17 +1,12 @@
 import { Construct } from "constructs";
 import { Workspace } from "@cdktf/provider-tfe";
-import { setVar } from "./var";
-
-interface TFVar {
-  name: string,
-  value: string,
-  sensitive: boolean
-}
+import { SetAndForgetVariable, RichVar, tfVar } from "./var";
 
 interface StandardWorkspaceConfig {
   organization: string,
   workingDirectory: string,
-  vars?: TFVar[]
+  structuredRunOutputEnabled?: boolean,
+  vars?: RichVar[],
 }
 
 export class StandardWorkspace extends Workspace {
@@ -19,6 +14,7 @@ export class StandardWorkspace extends Workspace {
     const {
       organization,
       workingDirectory,
+      structuredRunOutputEnabled,
       vars,
     } = config;
 
@@ -28,6 +24,7 @@ export class StandardWorkspace extends Workspace {
       executionMode: "remote",
       autoApply: true,
       workingDirectory,
+      structuredRunOutputEnabled,
       lifecycle: {
         ignoreChanges: ['vcs_repo'] // following actual provider's stanza
       }
@@ -37,19 +34,32 @@ export class StandardWorkspace extends Workspace {
       // }
     });
 
-    const ws = { id: this.id };
+    const self = this;
 
-    setVar(this, ws, 'tfc_organization', organization, false);
-    // this is technically unnecessary because of `terraform.workspace` - https://www.terraform.io/language/expressions/references#filesystem-and-workspace-info
-    // however `terraform.workspace` is hard to use in `cdktf` yet - https://github.com/hashicorp/terraform-cdk/issues/376
-    setVar(this, ws, 'tfc_workspace', name, false);
+    const defaultVars = [
+      {
+        ...tfVar,
+        key: 'tfc_organization',
+        value: organization,
+      },
+      // this is technically unnecessary because of `terraform.workspace` - https://www.terraform.io/language/expressions/references#filesystem-and-workspace-info
+      // however `terraform.workspace` is hard to use in `cdktf` yet - https://github.com/hashicorp/terraform-cdk/issues/376
+      {
+        ...tfVar,
+        key: 'tfc_workspace',
+        value: name,
+      },
+    ];
 
-    const scopeForVar = this;
+    const varsOrEmpty = vars ? vars : [];
 
-    if (vars) {
-      vars.forEach(({ name: n, value: v, sensitive }) => {
-        setVar(scopeForVar, ws, n, v, sensitive);
+    [...defaultVars, ...varsOrEmpty]
+      .map(config => ({
+        workspaceId: self.id,
+        ...config,
+      }))
+      .forEach((config) => {
+        new SetAndForgetVariable(self, config)
       });
-    }
   }
 }

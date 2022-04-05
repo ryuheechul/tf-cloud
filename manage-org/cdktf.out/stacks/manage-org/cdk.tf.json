@@ -14,6 +14,7 @@
           "lifecycle",
           "lifecycle",
           "lifecycle",
+          "lifecycle",
           "lifecycle"
         ]
       },
@@ -56,11 +57,11 @@
       }
     },
     "tfe_variable": {
-      "auto-tfvars-dev_tfvar-deploy_name_D9D197A1": {
+      "auto-tfvars-dev_deploy_name_C0516816": {
         "//": {
           "metadata": {
-            "path": "manage-org/auto-tfvars-dev/tfvar-deploy_name",
-            "uniqueId": "auto-tfvars-dev_tfvar-deploy_name_D9D197A1"
+            "path": "manage-org/auto-tfvars-dev/deploy_name",
+            "uniqueId": "auto-tfvars-dev_deploy_name_C0516816"
           }
         },
         "category": "terraform",
@@ -68,15 +69,14 @@
         "lifecycle": {
           "ignore_changes": "all"
         },
-        "sensitive": false,
         "value": "dev",
         "workspace_id": "${tfe_workspace.auto-tfvars-dev.id}"
       },
-      "auto-tfvars-dev_tfvar-tfc_organization_43C3FF25": {
+      "auto-tfvars-dev_tfc_organization_728CD71B": {
         "//": {
           "metadata": {
-            "path": "manage-org/auto-tfvars-dev/tfvar-tfc_organization",
-            "uniqueId": "auto-tfvars-dev_tfvar-tfc_organization_43C3FF25"
+            "path": "manage-org/auto-tfvars-dev/tfc_organization",
+            "uniqueId": "auto-tfvars-dev_tfc_organization_728CD71B"
           }
         },
         "category": "terraform",
@@ -84,15 +84,14 @@
         "lifecycle": {
           "ignore_changes": "all"
         },
-        "sensitive": false,
         "value": "${var.organization}",
         "workspace_id": "${tfe_workspace.auto-tfvars-dev.id}"
       },
-      "auto-tfvars-dev_tfvar-tfc_workspace_8619EF7F": {
+      "auto-tfvars-dev_tfc_workspace_CE287DB3": {
         "//": {
           "metadata": {
-            "path": "manage-org/auto-tfvars-dev/tfvar-tfc_workspace",
-            "uniqueId": "auto-tfvars-dev_tfvar-tfc_workspace_8619EF7F"
+            "path": "manage-org/auto-tfvars-dev/tfc_workspace",
+            "uniqueId": "auto-tfvars-dev_tfc_workspace_CE287DB3"
           }
         },
         "category": "terraform",
@@ -100,15 +99,14 @@
         "lifecycle": {
           "ignore_changes": "all"
         },
-        "sensitive": false,
         "value": "auto-tfvars-dev",
         "workspace_id": "${tfe_workspace.auto-tfvars-dev.id}"
       },
-      "auto-tfvars-prod_tfvar-deploy_name_ECCCC9D8": {
+      "auto-tfvars-prod_deploy_name_88108046": {
         "//": {
           "metadata": {
-            "path": "manage-org/auto-tfvars-prod/tfvar-deploy_name",
-            "uniqueId": "auto-tfvars-prod_tfvar-deploy_name_ECCCC9D8"
+            "path": "manage-org/auto-tfvars-prod/deploy_name",
+            "uniqueId": "auto-tfvars-prod_deploy_name_88108046"
           }
         },
         "category": "terraform",
@@ -116,15 +114,14 @@
         "lifecycle": {
           "ignore_changes": "all"
         },
-        "sensitive": false,
         "value": "prod",
         "workspace_id": "${tfe_workspace.auto-tfvars-prod.id}"
       },
-      "auto-tfvars-prod_tfvar-tfc_organization_8A66EB17": {
+      "auto-tfvars-prod_tfc_organization_AC7E83BC": {
         "//": {
           "metadata": {
-            "path": "manage-org/auto-tfvars-prod/tfvar-tfc_organization",
-            "uniqueId": "auto-tfvars-prod_tfvar-tfc_organization_8A66EB17"
+            "path": "manage-org/auto-tfvars-prod/tfc_organization",
+            "uniqueId": "auto-tfvars-prod_tfc_organization_AC7E83BC"
           }
         },
         "category": "terraform",
@@ -132,15 +129,14 @@
         "lifecycle": {
           "ignore_changes": "all"
         },
-        "sensitive": false,
         "value": "${var.organization}",
         "workspace_id": "${tfe_workspace.auto-tfvars-prod.id}"
       },
-      "auto-tfvars-prod_tfvar-tfc_workspace_709DD19A": {
+      "auto-tfvars-prod_tfc_workspace_254DDFE1": {
         "//": {
           "metadata": {
-            "path": "manage-org/auto-tfvars-prod/tfvar-tfc_workspace",
-            "uniqueId": "auto-tfvars-prod_tfvar-tfc_workspace_709DD19A"
+            "path": "manage-org/auto-tfvars-prod/tfc_workspace",
+            "uniqueId": "auto-tfvars-prod_tfc_workspace_254DDFE1"
           }
         },
         "category": "terraform",
@@ -148,15 +144,30 @@
         "lifecycle": {
           "ignore_changes": "all"
         },
-        "sensitive": false,
         "value": "auto-tfvars-prod",
         "workspace_id": "${tfe_workspace.auto-tfvars-prod.id}"
       },
-      "manage-org-tf_tfvar-tfc_organization_6FDF55AA": {
+      "manage-org-tf_TFE_TOKEN_59202C99": {
         "//": {
           "metadata": {
-            "path": "manage-org/manage-org-tf/tfvar-tfc_organization",
-            "uniqueId": "manage-org-tf_tfvar-tfc_organization_6FDF55AA"
+            "path": "manage-org/manage-org-tf/TFE_TOKEN",
+            "uniqueId": "manage-org-tf_TFE_TOKEN_59202C99"
+          }
+        },
+        "category": "env",
+        "key": "TFE_TOKEN",
+        "lifecycle": {
+          "ignore_changes": "all"
+        },
+        "sensitive": true,
+        "value": "${tfe_team_token.team_token.token}",
+        "workspace_id": "${tfe_workspace.manage-org-tf.id}"
+      },
+      "manage-org-tf_tfc_organization_16B0E4F7": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/manage-org-tf/tfc_organization",
+            "uniqueId": "manage-org-tf_tfc_organization_16B0E4F7"
           }
         },
         "category": "terraform",
@@ -164,15 +175,14 @@
         "lifecycle": {
           "ignore_changes": "all"
         },
-        "sensitive": false,
         "value": "${var.organization}",
         "workspace_id": "${tfe_workspace.manage-org-tf.id}"
       },
-      "manage-org-tf_tfvar-tfc_workspace_9593CF6A": {
+      "manage-org-tf_tfc_workspace_9D45125F": {
         "//": {
           "metadata": {
-            "path": "manage-org/manage-org-tf/tfvar-tfc_workspace",
-            "uniqueId": "manage-org-tf_tfvar-tfc_workspace_9593CF6A"
+            "path": "manage-org/manage-org-tf/tfc_workspace",
+            "uniqueId": "manage-org-tf_tfc_workspace_9D45125F"
           }
         },
         "category": "terraform",
@@ -180,15 +190,14 @@
         "lifecycle": {
           "ignore_changes": "all"
         },
-        "sensitive": false,
         "value": "manage-org-tf",
         "workspace_id": "${tfe_workspace.manage-org-tf.id}"
       },
-      "tfc-getting-started_tfvar-provider_token_9D70CAB1": {
+      "tfc-getting-started_provider_token_10649ECD": {
         "//": {
           "metadata": {
-            "path": "manage-org/tfc-getting-started/tfvar-provider_token",
-            "uniqueId": "tfc-getting-started_tfvar-provider_token_9D70CAB1"
+            "path": "manage-org/tfc-getting-started/provider_token",
+            "uniqueId": "tfc-getting-started_provider_token_10649ECD"
           }
         },
         "category": "terraform",
@@ -200,11 +209,11 @@
         "value": "${tfe_team_token.team_token.token}",
         "workspace_id": "${tfe_workspace.tfc-getting-started.id}"
       },
-      "tfc-getting-started_tfvar-tfc_organization_C61FF62D": {
+      "tfc-getting-started_tfc_organization_4654DC31": {
         "//": {
           "metadata": {
-            "path": "manage-org/tfc-getting-started/tfvar-tfc_organization",
-            "uniqueId": "tfc-getting-started_tfvar-tfc_organization_C61FF62D"
+            "path": "manage-org/tfc-getting-started/tfc_organization",
+            "uniqueId": "tfc-getting-started_tfc_organization_4654DC31"
           }
         },
         "category": "terraform",
@@ -212,15 +221,14 @@
         "lifecycle": {
           "ignore_changes": "all"
         },
-        "sensitive": false,
         "value": "${var.organization}",
         "workspace_id": "${tfe_workspace.tfc-getting-started.id}"
       },
-      "tfc-getting-started_tfvar-tfc_workspace_3D2D46C0": {
+      "tfc-getting-started_tfc_workspace_B988B6B1": {
         "//": {
           "metadata": {
-            "path": "manage-org/tfc-getting-started/tfvar-tfc_workspace",
-            "uniqueId": "tfc-getting-started_tfvar-tfc_workspace_3D2D46C0"
+            "path": "manage-org/tfc-getting-started/tfc_workspace",
+            "uniqueId": "tfc-getting-started_tfc_workspace_B988B6B1"
           }
         },
         "category": "terraform",
@@ -228,7 +236,6 @@
         "lifecycle": {
           "ignore_changes": "all"
         },
-        "sensitive": false,
         "value": "tfc-getting-started",
         "workspace_id": "${tfe_workspace.tfc-getting-started.id}"
       }
@@ -286,6 +293,7 @@
         },
         "name": "manage-org-tf",
         "organization": "${var.organization}",
+        "structured_run_output_enabled": false,
         "working_directory": "manage-org-tf"
       },
       "tfc-getting-started": {

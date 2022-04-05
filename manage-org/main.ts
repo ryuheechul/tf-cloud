@@ -3,6 +3,7 @@ import { App, TerraformStack, TerraformVariable, RemoteBackend } from "cdktf";
 import { TfeProvider, TeamToken, DataTfeTeam } from "@cdktf/provider-tfe"
 
 import { StandardWorkspace } from './lib/workspaces';
+import { tfVar, envVar } from './lib/var';
 
 const hostname = 'app.terraform.io';
 
@@ -38,20 +39,34 @@ class MyStack extends TerraformStack {
       teamId: team.id
     })
 
-    //TODO: enable `Include submodules on clone
+    // Adding workspaces, this should be comparable to ../manage-org-tf/main.tf
+
+    //TODO: enable `Include submodules on clone` option
     new StandardWorkspace(this, 'tfc-getting-started', {
       organization,
       workingDirectory: "tfc-getting-started",
-      vars: [{
-        name: 'provider_token',
-        value: token.token,
-        sensitive: true,
-      }]
+      vars: [
+        {
+          ...tfVar,
+          sensitive: true,
+          key: 'provider_token',
+          value: token.token,
+        }
+      ]
     });
 
     new StandardWorkspace(this, 'manage-org-tf', {
       organization,
       workingDirectory: "manage-org-tf",
+      structuredRunOutputEnabled: false,
+      vars: [
+        {
+          ...envVar,
+          sensitive: true,
+          key: 'TFE_TOKEN',
+          value: token.token,
+        }
+      ]
     });
 
     const scopeForWS = this;
@@ -62,9 +77,9 @@ class MyStack extends TerraformStack {
         organization,
         workingDirectory: "auto-tfvars",
         vars: [{
-          name: 'deploy_name',
+          ...tfVar,
+          key: 'deploy_name',
           value: deploy,
-          sensitive: false,
         }]
       });
     });
