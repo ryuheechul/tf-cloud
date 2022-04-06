@@ -19,10 +19,10 @@ variable "workspace_bundles" {
       structured_run_output_enabled = optional(bool)
       auto_apply                    = optional(bool)
       tags                          = optional(list(string))
-      vars = map(object({
+      extra_vars = optional(map(object({
         value     = string
         sensitive = bool
-      }))
+      })))
       # TBC
       # vcs = object
     }))
@@ -35,7 +35,7 @@ variable "workspace_bundles" {
       deploys = {
         "deploy-name" = {
           working_directory = "working/directory"
-          vars = {
+          extra_vars = {
             "var_name" = {
               value     = "value-for-var_name"
               sensitive = false

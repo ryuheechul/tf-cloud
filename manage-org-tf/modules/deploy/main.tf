@@ -34,7 +34,7 @@ resource "tfe_variable" "deploy_name" {
 
 # extra variables
 resource "tfe_variable" "extra_var" {
-  for_each = var.deploy.vars
+  for_each = var.deploy.extra_vars
   #   each.key = each.value
   # -------------------------
   # "var_name" = {

@@ -14,6 +14,10 @@ locals {
       # we can't do this yet - https://github.com/hashicorp/terraform/issues/28406
       # but empty list seems to be the default anyway
       # tags                          = []
+      #
+      # we can't do this yet - https://github.com/hashicorp/terraform/issues/28406
+      # but empty map seems to be the default anyway
+      # extra_vars                    = {}
     }
   })
 
@@ -39,7 +43,7 @@ module "ws_bundles" {
   # "bundle-name" = {
   #   "deploy-name" = {
   #     working_directory = "working/directory"
-  #     vars = {
+  #     extra_vars = {
   #       ...
   #     }
   #   }

@@ -21,7 +21,7 @@ variable "deploy" {
     structured_run_output_enabled = bool
     tags                          = list(string)
     auto_apply                    = bool
-    vars = map(object({
+    extra_vars = map(object({
       value     = string
       sensitive = bool
     }))

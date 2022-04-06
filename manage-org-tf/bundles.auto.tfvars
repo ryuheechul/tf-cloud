@@ -3,7 +3,6 @@ workspace_bundles = {
     deploys = {
       "staging" = {
         working_directory = "auto-tfvars"
-        vars              = {} # leave it empty when not necessary
       }
       "another-env" = {
         working_directory = "auto-tfvars"
@@ -14,7 +13,7 @@ workspace_bundles = {
           "varset-exclusive"
         ]
         auto_apply = false
-        vars = {
+        extra_vars = {
           "extra_var" = {
             value     = "extra value for extra_var"
             sensitive = false

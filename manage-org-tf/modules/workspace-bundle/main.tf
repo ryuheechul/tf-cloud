@@ -6,7 +6,7 @@ module "deploys" {
   # --------------------------
   # "deploy-name" = {
   #   working_directory = "working/directory"
-  #   vars = {
+  #   extra_vars = {
   #     "var_name" = {
   #       value     = "value-for-var_name"
   #       sensitive = false
