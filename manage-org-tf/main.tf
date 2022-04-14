@@ -49,9 +49,10 @@ module "ws_bundles" {
   #   }
   # }
 
-  bundle       = each.value
-  prefix       = each.key
-  organization = var.tfc_organization
+  bundle              = each.value
+  prefix              = each.key
+  organization        = var.tfc_organization
+  tfc_oauth_client_id = var.tfc_oauth_client_id
 }
 
 # imagine default convinient variables that will help each workspace to have some metadata

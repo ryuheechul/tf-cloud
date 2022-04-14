@@ -17,10 +17,20 @@ variable "bundle" {
       structured_run_output_enabled = bool
       tags                          = list(string)
       auto_apply                    = bool
+      repo = object({
+        identifier = string
+        branch     = optional(string)
+      })
       extra_vars = map(object({
         value     = string
         sensitive = bool
       }))
     }))
   })
+}
+
+variable "tfc_oauth_client_id" {
+  description = "to retrieve the information about vcs provider"
+  type        = string
+  sensitive   = true
 }

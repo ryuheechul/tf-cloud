@@ -1,3 +1,7 @@
+data "tfe_oauth_client" "client" {
+  oauth_client_id = var.tfc_oauth_client_id
+}
+
 resource "tfe_workspace" "workspace" {
   name                          = var.workspace_name
   organization                  = var.organization
@@ -6,10 +10,10 @@ resource "tfe_workspace" "workspace" {
   working_directory             = var.deploy.working_directory
   structured_run_output_enabled = var.deploy.structured_run_output_enabled
   tag_names                     = var.deploy.tags
-  lifecycle {
-    ignore_changes = [
-      vcs_repo
-    ]
+  vcs_repo {
+    identifier     = var.deploy.repo.identifier
+    branch         = var.deploy.repo.branch
+    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   }
 }
 

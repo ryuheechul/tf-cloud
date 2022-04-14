@@ -14,8 +14,9 @@ module "deploys" {
   #   }
   # }
 
-  name           = each.key
-  workspace_name = "${var.prefix}-${each.key}"
-  organization   = var.organization
-  deploy         = each.value
+  name                = each.key
+  workspace_name      = "${var.prefix}-${each.key}"
+  organization        = var.organization
+  deploy              = each.value
+  tfc_oauth_client_id = var.tfc_oauth_client_id
 }

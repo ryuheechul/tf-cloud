@@ -10,6 +10,12 @@ variable "tfc_workspace" {
   type        = string
 }
 
+variable "tfc_oauth_client_id" {
+  description = "to retrieve the information about vcs provider"
+  type        = string
+  sensitive   = true
+}
+
 # the default value for optional ones is defined at ./main.tf
 variable "workspace_bundles" {
   description = "this is the meat"
@@ -19,6 +25,10 @@ variable "workspace_bundles" {
       structured_run_output_enabled = optional(bool)
       auto_apply                    = optional(bool)
       tags                          = optional(list(string))
+      repo = object({
+        identifier = string
+        branch     = optional(string)
+      })
       extra_vars = optional(map(object({
         value     = string
         sensitive = bool
@@ -35,6 +45,9 @@ variable "workspace_bundles" {
       deploys = {
         "deploy-name" = {
           working_directory = "working/directory"
+          repo = {
+            identifier = "your/repo"
+          }
           extra_vars = {
             "var_name" = {
               value     = "value-for-var_name"

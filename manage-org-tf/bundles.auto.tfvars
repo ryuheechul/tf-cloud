@@ -3,6 +3,9 @@ workspace_bundles = {
     deploys = {
       "staging" = {
         working_directory = "auto-tfvars"
+        repo = {
+          identifier = "ryuheechul/tf-cloud"
+        }
       }
       "another-env" = {
         working_directory = "auto-tfvars"
@@ -13,6 +16,10 @@ workspace_bundles = {
           "varset-exclusive"
         ]
         auto_apply = false
+        repo = {
+          identifier = "ryuheechul/tf-cloud"
+          branch     = "main"
+        }
         extra_vars = {
           "extra_var" = {
             value     = "extra value for extra_var"
