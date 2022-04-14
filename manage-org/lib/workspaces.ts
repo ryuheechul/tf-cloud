@@ -1,11 +1,12 @@
 import { Construct } from "constructs";
-import { Workspace } from "@cdktf/provider-tfe";
+import { Workspace, WorkspaceVcsRepo } from "@cdktf/provider-tfe";
 import { SetAndForgetVariable, RichVar, tfVar } from "./var";
 
 interface StandardWorkspaceConfig {
   organization: string,
   workingDirectory: string,
   structuredRunOutputEnabled?: boolean,
+  vcsRepo: WorkspaceVcsRepo,
   vars?: RichVar[],
 }
 
@@ -15,6 +16,7 @@ export class StandardWorkspace extends Workspace {
       organization,
       workingDirectory,
       structuredRunOutputEnabled,
+      vcsRepo,
       vars,
     } = config;
 
@@ -25,13 +27,7 @@ export class StandardWorkspace extends Workspace {
       autoApply: true,
       workingDirectory,
       structuredRunOutputEnabled,
-      lifecycle: {
-        ignoreChanges: ['vcs_repo'] // following actual provider's stanza
-      }
-      // // manage repo manually for now
-      // vcsRepo: {
-      //   identifier: "ryuheechul/tf-cloud",
-      // }
+      vcsRepo,
     });
 
     const self = this;

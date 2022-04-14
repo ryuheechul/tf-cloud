@@ -2,11 +2,17 @@
 Why not manage Terraform Cloud using itself!
 
 ## Minimal Manual Bootstrap
+
+- follow the steps at [this guide](https://learn.hashicorp.com/tutorials/terraform/github-oauth?in=terraform/cloud) to link github and TFC.
 - create organization manually and create `manage-org` workspace
-- provide `TFE_TOKEN` value (by creating (not org) api token from Terraform Cloud) at `manage-org` workspace (mark sensitive)
-- provide `organization` variable for the created organization name
+- provide values for bootstrapping necessary vars by [bin/inject-vars.sh](./bin/inject-vars.sh) including:
+  - set `TFH_NAME` to `manage-org`
+  - set `TFC_OAUTH_CLIENT_ID` to by visiting `https://app.terraform.io/app/[your-org]/settings/version-control`
+    - click `Edit Client`
+    - extract the client id that starts from `oc-` (either in the address bar or breadcrumb)
+  - set `TFE_TOKEN` value (by creating (not org) api token from Terraform Cloud)
 - change execution mode to Remote (but leave Manual apply for safety)
-- Settings > Version Control > Version Control Workflow to connect this repo
+- Settings > Version Control > Version Control Workflow to connect this repo - Choose Github (Custom) to use the integration from the first step above.
 - set `manage-org/cdktf.out/stacks/manage-org` to Terraform Working Directory
 
 ## Prerequisites

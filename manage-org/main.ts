@@ -1,6 +1,6 @@
 import { Construct } from "constructs";
 import { App, TerraformStack, TerraformVariable, RemoteBackend } from "cdktf";
-import { TfeProvider, TeamToken, DataTfeTeam } from "@cdktf/provider-tfe"
+import { TfeProvider, TeamToken, DataTfeTeam, WorkspaceVcsRepo, DataTfeOauthClient } from "@cdktf/provider-tfe"
 
 import { StandardWorkspace } from './lib/workspaces';
 import { tfVar, envVar } from './lib/var';
@@ -15,9 +15,22 @@ class MyStack extends TerraformStack {
       description: "to be able to set Terraform Cloud Organization name via variable"
     })).value;
 
-    const tfc_oauth_client_id = (new TerraformVariable(this, "tfc_oauth_client_id", {
+    const tfcOauthClientId = (new TerraformVariable(this, "tfc_oauth_client_id", {
       description: "to retrieve the information about vcs provider"
     })).value;
+
+    const mainRepo = (new TerraformVariable(this, "main_repo", {
+      description: "main vcs repo identifier"
+    })).value;
+
+    const githubClient = new DataTfeOauthClient(this, 'github', {
+      oauthClientId: tfcOauthClientId
+    })
+
+    const vcsRepo: WorkspaceVcsRepo = {
+      identifier: mainRepo,
+      oauthTokenId: githubClient.oauthTokenId,
+    };
 
     new TfeProvider(this, "Tfe", {})
 
@@ -49,6 +62,7 @@ class MyStack extends TerraformStack {
     new StandardWorkspace(this, 'tfc-getting-started', {
       organization,
       workingDirectory: "tfc-getting-started",
+      vcsRepo,
       vars: [
         {
           ...tfVar,
@@ -63,6 +77,7 @@ class MyStack extends TerraformStack {
       organization,
       workingDirectory: "manage-org-tf",
       structuredRunOutputEnabled: false,
+      vcsRepo,
       vars: [
         {
           ...envVar,
@@ -81,7 +96,7 @@ class MyStack extends TerraformStack {
           ...tfVar,
           sensitive: true,
           key: 'tfc_oauth_client_id',
-          value: tfc_oauth_client_id,
+          value: tfcOauthClientId,
         },
       ]
     });
@@ -93,6 +108,7 @@ class MyStack extends TerraformStack {
       new StandardWorkspace(scopeForWS, name + '-' + deploy, {
         organization,
         workingDirectory: "auto-tfvars",
+        vcsRepo,
         vars: [{
           ...tfVar,
           key: 'deploy_name',

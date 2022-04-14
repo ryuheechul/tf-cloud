@@ -27,6 +27,17 @@
     }
   },
   "data": {
+    "tfe_oauth_client": {
+      "github": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/github",
+            "uniqueId": "github"
+          }
+        },
+        "oauth_client_id": "${var.tfc_oauth_client_id}"
+      }
+    },
     "tfe_team": {
       "team_owners": {
         "//": {
@@ -283,13 +294,12 @@
         },
         "auto_apply": true,
         "execution_mode": "remote",
-        "lifecycle": {
-          "ignore_changes": [
-            "vcs_repo"
-          ]
-        },
         "name": "auto-tfvars-dev",
         "organization": "${var.organization}",
+        "vcs_repo": {
+          "identifier": "${var.main_repo}",
+          "oauth_token_id": "${data.tfe_oauth_client.github.oauth_token_id}"
+        },
         "working_directory": "auto-tfvars"
       },
       "auto-tfvars-prod": {
@@ -301,13 +311,12 @@
         },
         "auto_apply": true,
         "execution_mode": "remote",
-        "lifecycle": {
-          "ignore_changes": [
-            "vcs_repo"
-          ]
-        },
         "name": "auto-tfvars-prod",
         "organization": "${var.organization}",
+        "vcs_repo": {
+          "identifier": "${var.main_repo}",
+          "oauth_token_id": "${data.tfe_oauth_client.github.oauth_token_id}"
+        },
         "working_directory": "auto-tfvars"
       },
       "manage-org-tf": {
@@ -319,14 +328,13 @@
         },
         "auto_apply": true,
         "execution_mode": "remote",
-        "lifecycle": {
-          "ignore_changes": [
-            "vcs_repo"
-          ]
-        },
         "name": "manage-org-tf",
         "organization": "${var.organization}",
         "structured_run_output_enabled": false,
+        "vcs_repo": {
+          "identifier": "${var.main_repo}",
+          "oauth_token_id": "${data.tfe_oauth_client.github.oauth_token_id}"
+        },
         "working_directory": "manage-org-tf"
       },
       "tfc-getting-started": {
@@ -338,13 +346,12 @@
         },
         "auto_apply": true,
         "execution_mode": "remote",
-        "lifecycle": {
-          "ignore_changes": [
-            "vcs_repo"
-          ]
-        },
         "name": "tfc-getting-started",
         "organization": "${var.organization}",
+        "vcs_repo": {
+          "identifier": "${var.main_repo}",
+          "oauth_token_id": "${data.tfe_oauth_client.github.oauth_token_id}"
+        },
         "working_directory": "tfc-getting-started"
       }
     }
@@ -367,6 +374,9 @@
     }
   },
   "variable": {
+    "main_repo": {
+      "description": "main vcs repo identifier"
+    },
     "organization": {
       "description": "to be able to set Terraform Cloud Organization name via variable"
     },

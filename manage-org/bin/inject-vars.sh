@@ -27,6 +27,7 @@ fail-on-missing() {
 
 fail-on-missing TFH_org
 fail-on-missing TFH_name
+fail-on-missing TFC_OAUTH_CLIENT_ID
 
 push-var() {
 	tfh pushvars -overwrite ${1} -var ${1}="${2}"
@@ -56,6 +57,8 @@ echo "going to push (overwrite) these values"
 
 push-var organization "${org}"
 push-var workspace "${ws}"
+push-var main_repo "$(git remote get-url origin | sed 's/git@.*://' | sed 's/.git$//')"
+push-svar tfc_oauth_client_id "${TFC_OAUTH_CLIENT_ID}"
 
 push-sevar SECRET_ENV_VAR_EXAMPLE "very secret"
 
@@ -63,6 +66,8 @@ echo "verifying the values pushed"
 
 pull-var organization
 pull-var workspace
+pull-var main_repo
+pull-var tfc_oauth_client_id
 
 # since we can't retrieve the content of sensitive value, retrieving empty value means the value exists
 pull-evar SECRET_ENV_VAR_EXAMPLE
