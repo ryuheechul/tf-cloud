@@ -26,6 +26,11 @@ resource "tfe_variable" "workspace" {
   workspace_id = tfe_workspace.workspace.id
 }
 
+# this allows auto-tfvars module to differentiate the deploy
+# however the initial auto plan might fail as
+# injecting var a slightly later than workspace creation
+# and auto plan could happen in between
+# in that case, just start a new plan manually
 resource "tfe_variable" "deploy_name" {
   category     = "terraform"
   key          = "deploy_name"

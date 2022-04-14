@@ -109,6 +109,11 @@ class MyStack extends TerraformStack {
         organization,
         workingDirectory: "auto-tfvars",
         vcsRepo,
+        // this allows auto-tfvars module to differentiate the deploy
+        // however the initial auto plan might fail as
+        // injecting var a slightly later than workspace creation
+        // and auto plan could happen in between
+        // in that case, just start a new plan manually
         vars: [{
           ...tfVar,
           key: 'deploy_name',
