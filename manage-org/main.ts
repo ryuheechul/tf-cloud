@@ -15,6 +15,10 @@ class MyStack extends TerraformStack {
       description: "to be able to set Terraform Cloud Organization name via variable"
     })).value;
 
+    const tfc_oauth_client_id = (new TerraformVariable(this, "tfc_oauth_client_id", {
+      description: "to retrieve the information about vcs provider"
+    })).value;
+
     new TfeProvider(this, "Tfe", {})
 
     // turns out this will not work on local execution as remote backend doesn't support reading variables
@@ -72,7 +76,13 @@ class MyStack extends TerraformStack {
           ...envVar,
           key: 'TF_LOG',
           value: 'trace'
-        }
+        },
+        {
+          ...tfVar,
+          sensitive: true,
+          key: 'tfc_oauth_client_id',
+          value: tfc_oauth_client_id,
+        },
       ]
     });
 

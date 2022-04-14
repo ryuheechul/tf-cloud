@@ -16,6 +16,7 @@
           "lifecycle",
           "lifecycle",
           "lifecycle",
+          "lifecycle",
           "lifecycle"
         ]
       },
@@ -177,6 +178,22 @@
           "ignore_changes": "all"
         },
         "value": "trace",
+        "workspace_id": "${tfe_workspace.manage-org-tf.id}"
+      },
+      "manage-org-tf_tfc_oauth_client_id_620C6F0D": {
+        "//": {
+          "metadata": {
+            "path": "manage-org/manage-org-tf/tfc_oauth_client_id",
+            "uniqueId": "manage-org-tf_tfc_oauth_client_id_620C6F0D"
+          }
+        },
+        "category": "terraform",
+        "key": "tfc_oauth_client_id",
+        "lifecycle": {
+          "ignore_changes": "all"
+        },
+        "sensitive": true,
+        "value": "${var.tfc_oauth_client_id}",
         "workspace_id": "${tfe_workspace.manage-org-tf.id}"
       },
       "manage-org-tf_tfc_organization_16B0E4F7": {
@@ -352,6 +369,9 @@
   "variable": {
     "organization": {
       "description": "to be able to set Terraform Cloud Organization name via variable"
+    },
+    "tfc_oauth_client_id": {
+      "description": "to retrieve the information about vcs provider"
     }
   }
 }
