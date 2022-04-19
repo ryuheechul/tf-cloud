@@ -32,6 +32,10 @@ locals {
   ]
 }
 
+data "tfe_oauth_client" "github" {
+  oauth_client_id = var.tfc_oauth_client_id
+}
+
 # this + ./bundles.auto.tfvars can be comparable to ../manage-org/main.ts
 module "ws_bundles" {
   source = "./modules/workspace-bundle"
@@ -49,10 +53,10 @@ module "ws_bundles" {
   #   }
   # }
 
-  bundle              = each.value
-  prefix              = each.key
-  organization        = var.tfc_organization
-  tfc_oauth_client_id = var.tfc_oauth_client_id
+  bundle         = each.value
+  prefix         = each.key
+  organization   = var.tfc_organization
+  oauth_token_id = data.tfe_oauth_client.github.oauth_token_id
 }
 
 # imagine default convinient variables that will help each workspace to have some metadata

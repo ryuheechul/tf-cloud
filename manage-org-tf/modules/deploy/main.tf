@@ -1,7 +1,3 @@
-data "tfe_oauth_client" "github" {
-  oauth_client_id = var.tfc_oauth_client_id
-}
-
 resource "tfe_workspace" "workspace" {
   name                          = var.workspace_name
   organization                  = var.organization
@@ -13,7 +9,7 @@ resource "tfe_workspace" "workspace" {
   vcs_repo {
     identifier     = var.deploy.repo.identifier
     branch         = var.deploy.repo.branch
-    oauth_token_id = data.tfe_oauth_client.github.oauth_token_id
+    oauth_token_id = var.oauth_token_id
   }
 }
 

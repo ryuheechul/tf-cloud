@@ -32,8 +32,7 @@ variable "deploy" {
   })
 }
 
-variable "tfc_oauth_client_id" {
-  description = "to retrieve the information about vcs provider"
+variable "oauth_token_id" {
+  description = "to connect with VCS (github) provider"
   type        = string
-  sensitive   = true
 }
