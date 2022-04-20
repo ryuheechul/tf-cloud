@@ -5,6 +5,7 @@ Why not manage Terraform Cloud using itself!
 
 - create an organization manually and create `manage-org` workspace
 - follow the steps at [this guide](https://learn.hashicorp.com/tutorials/terraform/github-oauth?in=terraform/cloud) to link github and TFC.
+  - read [GITHUB-INTEGRATION.md](./GITHUB-INTEGRATION.md) for more details
 - provide values for bootstrapping necessary vars by [bin/inject-vars.sh](./bin/inject-vars.sh) including:
   - set `organization` to the one created from previous step
   - set `workspace` to `manage-org`
