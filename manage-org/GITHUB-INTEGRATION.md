@@ -2,24 +2,24 @@
 
 _Things written here is based on my intepretation of what I experienced on the time of writing so it might not be true or applicable any more when you read it._
 
-A bit lengthy but general guide can be found at https://www.hashicorp.com/resources/a-practitioner-s-guide-to-using-hashicorp-terraform-cloud-with-github
+A bit lengthy but general guide can be found at https://www.hashicorp.com/resources/a-practitioner-s-guide-to-using-hashicorp-terraform-cloud-with-github.
 
 And here are two distinctive approaches I went through.
 
 ## 1. Configuration-Free GitHub Usage
 
-Which corresponds to this doc, https://www.terraform.io/cloud-docs/vcs/github-app
+Which corresponds to this doc, https://www.terraform.io/cloud-docs/vcs/github-app.
 
 This is basically a quick and dirty way to integrate with Github. Click through some steps and voila! Now you allowed your Terraform Cloud Organization/Workspace to access certain repos on Github.
 
 It works well if you a managing TFC mainly via web console (GUI).
 
 ## 2. Configure GitHub.com Access through OAuth
-Which corresponds to this doc, https://learn.hashicorp.com/tutorials/terraform/github-oauth
+Which corresponds to this doc, https://learn.hashicorp.com/tutorials/terraform/github-oauth.
 
 This is another way to integrate with Github. It involes with a bit more than just clicking buttons but it's actually not that much.
 
-And this method is "necessary" if you are managing workspaces via [tfe provider](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace#vcs_repo)
+And this method is "necessary" if you are managing workspaces via [tfe provider](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace#vcs_repo).
 
 _Otherwise you should be able to [do even this with code](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/oauth_client) but I personally wouldn't do this unless it's absolutely required._
 
@@ -37,7 +37,7 @@ Whereas way 2. is using [Github OAuth App](https://docs.github.com/en/developers
 which will be listed at `https://github.com/settings/developers` or `https://github.com/organizations/[your-org]/settings/applications`.
 And this app is actually created and named by you (or your org) specifically for your needs.
 
-This confusion must be quite common that they even mentions it in [their tutorial](https://learn.hashicorp.com/tutorials/terraform/github-oauth)
+This confusion must be quite common that they even mentions it in [their tutorial](https://learn.hashicorp.com/tutorials/terraform/github-oauth).
 
 > In the navigation sidebar, click "Developer settings," then make sure you're on the "OAuth Apps" page (not "GitHub Apps").
 
