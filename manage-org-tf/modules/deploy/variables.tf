@@ -13,6 +13,15 @@ variable "organization" {
   type        = string
 }
 
+variable "repo" {
+  description = "vcs (github) repo"
+  type = object({
+    identifier     = string
+    branch         = string
+    oauth_token_id = string
+  })
+}
+
 variable "deploy" {
   description = "this is the meat"
   type = object({
@@ -21,18 +30,9 @@ variable "deploy" {
     structured_run_output_enabled = bool
     tags                          = list(string)
     auto_apply                    = bool
-    repo = object({
-      identifier = string
-      branch     = optional(string)
-    })
     extra_vars = map(object({
       value     = string
       sensitive = bool
     }))
   })
-}
-
-variable "oauth_token_id" {
-  description = "to connect with VCS (github) provider"
-  type        = string
 }

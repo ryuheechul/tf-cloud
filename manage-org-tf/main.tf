@@ -10,6 +10,7 @@ locals {
   workspace_bundles = defaults(var.workspace_bundles, {
     deploys = {
       structured_run_output_enabled = true
+      branch                        = ""
       auto_apply                    = true
       # we can't do this yet - https://github.com/hashicorp/terraform/issues/28406
       # but empty list seems to be the default anyway

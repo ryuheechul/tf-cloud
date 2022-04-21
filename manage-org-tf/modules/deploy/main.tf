@@ -7,9 +7,9 @@ resource "tfe_workspace" "workspace" {
   structured_run_output_enabled = var.deploy.structured_run_output_enabled
   tag_names                     = var.deploy.tags
   vcs_repo {
-    identifier     = var.deploy.repo.identifier
-    branch         = var.deploy.repo.branch
-    oauth_token_id = var.oauth_token_id
+    identifier     = var.repo.identifier
+    branch         = var.repo.branch
+    oauth_token_id = var.repo.oauth_token_id
   }
 }
 

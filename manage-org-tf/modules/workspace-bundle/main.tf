@@ -17,6 +17,10 @@ module "deploys" {
   name           = each.key
   workspace_name = "${var.prefix}-${each.key}"
   organization   = var.organization
-  deploy         = each.value
-  oauth_token_id = var.oauth_token_id
+  repo = {
+    oauth_token_id = var.oauth_token_id
+    identifier     = var.bundle.repo
+    branch         = each.value.branch
+  }
+  deploy = each.value
 }

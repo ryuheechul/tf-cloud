@@ -20,15 +20,13 @@ variable "tfc_oauth_client_id" {
 variable "workspace_bundles" {
   description = "this is the meat"
   type = map(object({
+    repo = string
     deploys = map(object({
       working_directory             = string
       structured_run_output_enabled = optional(bool)
       auto_apply                    = optional(bool)
       tags                          = optional(list(string))
-      repo = object({
-        identifier = string
-        branch     = optional(string)
-      })
+      branch                        = optional(string)
       extra_vars = optional(map(object({
         value     = string
         sensitive = bool
@@ -42,12 +40,10 @@ variable "workspace_bundles" {
   # look at ./bundles.auto.tfvars for real value
   default = {
     "bundle-name" = {
+      repo = "your/repo"
       deploys = {
         "deploy-name" = {
           working_directory = "working/directory"
-          repo = {
-            identifier = "your/repo"
-          }
           extra_vars = {
             "var_name" = {
               value     = "value-for-var_name"

@@ -11,16 +11,14 @@ variable "organization" {
 variable "bundle" {
   description = "this is the meat"
   type = object({
+    repo = string
     deploys = map(object({
       working_directory = string
+      branch            = string
       # this doesn't have to be optional here since it's taken care at the root level
       structured_run_output_enabled = bool
       tags                          = list(string)
       auto_apply                    = bool
-      repo = object({
-        identifier = string
-        branch     = optional(string)
-      })
       extra_vars = map(object({
         value     = string
         sensitive = bool
